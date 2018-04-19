@@ -93,7 +93,7 @@ class Settings {
   }
 
   get appName() {
-    return this.uiMode === 'mist' ? 'Mist' : 'Ethereum Wallet';
+    return this.uiMode === 'mist' ? 'Mist' : 'AICHAIN Wallet';
   }
 
   get appLicense() {
@@ -161,15 +161,15 @@ class Settings {
     ipcPath = this.userHomePath;
 
     if (process.platform === 'darwin') {
-      ipcPath += '/Library/Ethereum/geth.ipc';
+      ipcPath += '/Library/AICHAIN/gait.ipc';
     } else if (
       process.platform === 'freebsd' ||
       process.platform === 'linux' ||
       process.platform === 'sunos'
     ) {
-      ipcPath += '/.ethereum/geth.ipc';
+      ipcPath += '/.aichain/gait.ipc';
     } else if (process.platform === 'win32') {
-      ipcPath = '\\\\.\\pipe\\geth.ipc';
+      ipcPath = '\\\\.\\pipe\\gait.ipc';
     }
 
     settingsLog.debug(`IPC path: ${ipcPath}`);
@@ -182,6 +182,7 @@ class Settings {
   }
 
   get network() {
+  	// log.info(`CLEMENT DEBUG get network=: ${argv.network}`);
     return argv.network;
   }
 

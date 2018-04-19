@@ -269,7 +269,7 @@ let menuTempl = function(webviews) {
                 // geth
               } else {
                 if (process.platform === 'darwin') {
-                  userPath += '/Library/Ethereum/keystore';
+                  userPath += '/Library/AICHAIN/keystore';
                 }
 
                 if (
@@ -277,11 +277,11 @@ let menuTempl = function(webviews) {
                   process.platform === 'linux' ||
                   process.platform === 'sunos'
                 ) {
-                  userPath += '/.ethereum/keystore';
+                  userPath += '/.aichain/keystore';
                 }
 
                 if (process.platform === 'win32') {
-                  userPath = `${Settings.appDataPath}\\Ethereum\\keystore`;
+                  userPath = `${Settings.appDataPath}\\AICHAIN\\keystore`;
                 }
               }
 
@@ -537,36 +537,6 @@ let menuTempl = function(webviews) {
         click() {
           restartNode(ethereumNode.type, 'main');
         }
-      },
-      {
-        label: 'Ropsten - Test network',
-        accelerator: 'CommandOrControl+Alt+2',
-        checked: ethereumNode.isOwnNode && ethereumNode.network === 'test',
-        enabled: ethereumNode.isOwnNode,
-        type: 'checkbox',
-        click() {
-          restartNode(ethereumNode.type, 'test');
-        }
-      },
-      {
-        label: 'Rinkeby - Test network',
-        accelerator: 'CommandOrControl+Alt+3',
-        checked: ethereumNode.isOwnNode && ethereumNode.network === 'rinkeby',
-        enabled: ethereumNode.isOwnNode,
-        type: 'checkbox',
-        click() {
-          restartNode(ethereumNode.type, 'rinkeby');
-        }
-      },
-      {
-        label: 'Solo network',
-        accelerator: 'CommandOrControl+Alt+4',
-        checked: ethereumNode.isOwnNode && ethereumNode.isDevNetwork,
-        enabled: ethereumNode.isOwnNode,
-        type: 'checkbox',
-        click() {
-          restartNode(ethereumNode.type, 'dev');
-        }
       }
     ]
   });
@@ -690,19 +660,19 @@ let menuTempl = function(webviews) {
     {
       label: i18n.t('mist.applicationMenu.help.mistWiki'),
       click() {
-        shell.openExternal('https://github.com/ethereum/mist/wiki');
+        shell.openExternal('https://github.com/AICHAIN-CORE/mist/wiki');
       }
     },
     {
       label: i18n.t('mist.applicationMenu.help.gitter'),
       click() {
-        shell.openExternal('https://gitter.im/ethereum/mist');
+        shell.openExternal('https://gitter.im/AICHAIN-CORE/mist');
       }
     },
     {
       label: i18n.t('mist.applicationMenu.help.reportBug'),
       click() {
-        shell.openExternal('https://github.com/ethereum/mist/issues');
+        shell.openExternal('https://github.com/AICHAIN-CORE/mist/issues');
       }
     }
   );

@@ -36,8 +36,23 @@ module.exports = class extends BaseProcessor {
             throw this.ERRORS.INVALID_PAYLOAD;
           } else {
             // make sure all data is lowercase and has 0x
-            if (val) val = `0x${val.toLowerCase().replace(/^0x/, '')}`;
-
+            if (val) {
+            	 console.log('CLEMENT DEBUG val in=', val);
+            	 console.log('CLEMENT DEBUG key in=', key);
+            	 
+            	 if (key === 'from' || key === 'to') {
+		            	 if (val.toLowerCase().substring(0, 2) === '0x') {
+		                   val = 'ai' + val.toLowerCase().replace('0x', '');
+		               } else if (val.toLowerCase().substring(0, 2) === 'ai') {
+		                   val = 'ai' + val.toLowerCase().replace('ai', '');
+		               } else {
+		                   val = 'ai' + val.toLowerCase().replace('0x', '');
+		               }
+               } else {
+                   val = '0x' + val.toLowerCase().replace('0x', '');
+               }
+               console.log('CLEMENT DEBUG val out=', val);
+            }
             if (val.substr(2).match(/[^0-9a-f]/gim)) {
               throw this.ERRORS.INVALID_PAYLOAD;
             }

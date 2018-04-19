@@ -62,7 +62,7 @@ Return the friendly app name.
 @method (appName)
 **/
 Template.registerHelper('appName', function() {
-  return window.mistMode === 'mist' ? 'Mist' : 'Ethereum Wallet';
+  return window.mistMode === 'mist' ? 'Mist' : 'AICHAIN Wallet';
 });
 
 /**
@@ -165,3 +165,6 @@ Formats a number.
 @return {String} The formatted number
 **/
 Template.registerHelper('formatBalance', Helpers.formatBalance);
+
+Template.registerHelper('formatBalanceWithUnit', Helpers.formatBalanceWithUnit);
+Template.registerHelper('formatBalanceWithLowUnit', Helpers.formatBalanceWithLowUnit);

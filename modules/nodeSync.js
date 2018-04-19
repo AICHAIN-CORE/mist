@@ -33,7 +33,7 @@ class NodeSync extends EventEmitter {
 
     this._syncPromise = Q.try(() => {
       if (!ethereumNode.isIpcConnected) {
-        throw new Error('Cannot sync - Ethereum node not yet connected');
+        throw new Error('Cannot sync - AICHAIN node not yet connected');
       }
 
       return new Q((resolve, reject) => {
@@ -180,13 +180,13 @@ class NodeSync extends EventEmitter {
     switch (state) { // eslint-disable-line default-case
       // stop syncing when node about to be stopped
       case ethereumNode.STATES.STOPPING:
-        log.info('Ethereum node stopping, so stop sync');
+        log.info('AICHAIN node stopping, so stop sync');
 
         this.stop();
         break;
       // auto-sync whenever node gets connected
       case ethereumNode.STATES.CONNECTED:
-        log.info('Ethereum node connected, re-start sync');
+        log.info('AICHAIN node connected, re-start sync');
 
         // stop syncing, then start again
         this.stop().then(() => {

@@ -8,19 +8,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ethereum/mist.git"
+    "url": "git+https://github.com/AICHAIN-CORE/mist.git"
   },
   "keywords": [
-    "ethereum",
+    "AICHAIN",
     "mist",
     "web3"
   ],
-  "author": "Fabian Vogelsteller <fabian@ethereum.org>",
+  "author": "clement.duan <clement.duan@aichain.me>",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/ethereum/mist/issues"
+    "url": "https://github.com/AICHAIN-CORE/mist/issues"
   },
-  "homepage": "https://github.com/ethereum/mist#readme",
+  "homepage": "https://github.com/AICHAIN-CORE/mist#readme",
   "dependencies": {
     "babel-runtime": "^6.18.0"
   }

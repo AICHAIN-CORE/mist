@@ -3,6 +3,13 @@ Sets the ethereum provider, as well as "web3" for backwards compatibility.
 
 @module ethereumProvider
 */
+
+//const Web3 = require('../../aitweb3/lib/web3');
+// dont override global variable
+//if (typeof window !== 'undefined' && typeof window.Web3 === 'undefined') {
+//    window.Web3 = Web3;
+//}
+
 const Web3 = require('web3');
 const BigNumber = require('bignumber.js');
 const ipcProviderWrapper = require('../../ipc/ipcProviderWrapper.js');

@@ -23,7 +23,7 @@ const check = (exports.check = () => {
       break;
   }
 
-  return got('https://api.github.com/repos/ethereum/mist/releases', {
+  return got('https://api.github.com/repos/AICHAIN-CORE/mist/releases', {
     timeout: 3000,
     json: true
   })
@@ -73,20 +73,7 @@ function showWindow(options) {
 }
 
 exports.run = () => {
-  check()
-    .then(update => {
-      if (update) {
-        showWindow({
-          sendData: {
-            uiAction_checkUpdateDone: update
-          }
-        });
-      }
-      store.dispatch({ type: '[MAIN]:UPDATE_CHECKER:FINISHED' });
-    })
-    .catch(err => {
-      log.error(err);
-    });
+   store.dispatch({ type: '[MAIN]:UPDATE_CHECKER:FINISHED' });
 };
 
 exports.runVisibly = () => {
@@ -95,16 +82,6 @@ exports.runVisibly = () => {
   });
 
   wnd.on('ready', () => {
-    check()
-      .then(update => {
-        wnd.send({
-          uiAction_checkUpdateDone: update
-        });
-      })
-      .catch(err => {
-        log.error(err);
-
-        wnd.send('uiAction_checkUpdateDone');
-      });
+    wnd.send('uiAction_checkUpdateDone');
   });
 };

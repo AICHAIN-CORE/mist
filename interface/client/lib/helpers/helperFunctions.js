@@ -443,8 +443,36 @@ Formats a given number toa unit balance
 @param {String} format           the format string e.g. "0.0[000]" see http://numeraljs.com for more.
 @return {String} The formated balance including the unit
 **/
-// Helpers.formatBalance = function(number, format){
-//     number = web3.fromWei(number, LocalStore.get('etherUnit'));
+Helpers.formatBalanceWithUnit = function(number, format, unit){
+     
+     var balance = EthTools.formatBalance(number, format, unit);
+     var cur_unit = EthTools.getUnit();
+     var aitUnit = cur_unit;
+     
+     if(cur_unit === 'ether')
+         aitUnit = 'AIT';
+     else
+     	   aitUnit = cur_unit;
+     
+     balance += ' ';
+     balance += aitUnit;
+     
+     return balance;
+};
 
-//     return Helpers.formatNumber(number, format) +' '+ LocalStore.get('etherUnit');
-// };
+Helpers.formatBalanceWithLowUnit = function(number, format, unit){
+     
+     var balance = EthTools.formatBalance(number, format, unit);
+     var cur_unit = EthTools.getUnit();
+     var aitUnit = cur_unit;
+     
+     if(cur_unit === 'ether')
+         aitUnit = 'ait';
+     else
+     	   aitUnit = cur_unit;
+     
+     balance += ' ';
+     balance += aitUnit;
+     
+     return balance;
+};

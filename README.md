@@ -1,6 +1,9 @@
 # Mist Browser<sup>beta</sup>
 
-First commit, forked from ethereum. will change it later.
+[![Github All Releases](https://img.shields.io/github/downloads/ethereum/mist/total.svg)]()
+[![Build Status develop branch](https://travis-ci.org/ethereum/mist.svg?branch=develop)](https://travis-ci.org/ethereum/mist)
+[![Join the chat at https://gitter.im/ethereum/mist](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ethereum/mist)
+[![Code Triagers Badge](https://www.codetriage.com/ethereum/mist/badges/users.svg)](https://www.codetriage.com/ethereum/mist)
 
 The Mist browser is the tool of choice to browse and use Ðapps.
 
@@ -10,18 +13,10 @@ Please note that this repository is the Electron host for the Meteor based walle
 
 ## Help and troubleshooting
 
-In order to get help regarding Mist or Ethereum Wallet, please follow:
+In order to get help regarding Mist or AICHAIN Wallet, please follow:
 
-1.  Please check the [Mist troubleshooting guide](https://github.com/ethereum/mist/wiki).
-1.  Go to the [Gitter Channel](https://gitter.im/ethereum/mist) to connect with the community for instant help.
-1.  Search for [similar issues](https://github.com/ethereum/mist/issues?q=is%3Aopen+is%3Aissue+label%3A%22Type%3A+Canonical%22) and potential help.
-1.  Or create a [new issue](https://github.com/ethereum/mist/issues).
-
-## How to contribute
-
-Contributions via Pull Requests are so welcome. You can see where to help looking for issues with the [Enhancement](https://github.com/ethereum/mist/issues?q=is%3Aopen+is%3Aissue+label%3A%22Type%3A+Enhancement%22) or [Bug](https://github.com/ethereum/mist/issues?q=is%3Aopen+is%3Aissue+label%3A%22Type%3A+Bug%22) labels. We can help guiding you towards the solution.
-
-You can also help by [responding to issues](https://github.com/ethereum/mist/issues?q=is%3Aissue+is%3Aopen+label%3A%22Status%3A+Triage%22). Sign up on [CodeTriage](https://www.codetriage.com/ethereum/mist) and it'll send you gentle notifications with a configurable frequency. It is a nice way to help while learning.
+1.  Please check the [Mist troubleshooting guide](https://github.com/AICHAIN-CORE/mist/wiki).
+1.  Create a [new issue](https://github.com/AICHAIN-CORE/mist/issues).
 
 ## Installation
 
@@ -104,8 +99,6 @@ $ cd mist
 $ yarn dev:electron
 ```
 
-_NOTE: client-binaries (e.g. [geth](https://github.com/ethereum/go-ethereum)) specified in [clientBinaries.json](https://github.com/ethereum/mist/blob/master/clientBinaries.json) will be checked during every startup and downloaded if out-of-date, binaries are stored in the [config folder](#config-folder)_
-
 _NOTE: use `--help` to display available options, e.g. `--loglevel debug` (or `trace`) for verbose output_
 
 ### Run the Wallet
@@ -138,9 +131,9 @@ it's less secure than using the default IPC method.
 $ yarn dev:electron --rpc http://localhost:8545
 ```
 
-### Passing options to Geth
+### Passing options to gait
 
-You can pass command-line options directly to Geth by prefixing them with `--node-` in
+You can pass command-line options directly to gait by prefixing them with `--node-` in
 the command-line invocation:
 
 ```bash
@@ -151,13 +144,13 @@ The `--rpc` Mist option is a special case. If you set this to an IPC socket file
 path then the `--ipcpath` option automatically gets set, i.e.:
 
 ```bash
-$ yarn dev:electron --rpc /my/geth.ipc
+$ yarn dev:electron --rpc /my/gait.ipc
 ```
 
 ...is the same as doing...
 
 ```bash
-$ yarn dev:electron --rpc /my/geth.ipc --node-ipcpath /my/geth.ipc
+$ yarn dev:electron --rpc /my/gait.ipc --node-ipcpath /my/gait.ipc
 ```
 
 ### Creating a local private net
@@ -171,13 +164,13 @@ To run a private network you will need to set the IPC path, network id and data
 folder:
 
 ```bash
-$ yarn dev:electron --rpc ~/Library/Ethereum/geth.ipc --node-networkid 1234 --node-datadir ~/Library/Ethereum/privatenet
+$ yarn dev:electron --rpc ~/Library/Ethereum/gait.ipc --node-networkid 1234 --node-datadir ~/Library/Ethereum/privatenet
 ```
 
 _NOTE: since `ipcpath` is also a Mist option you do not need to also include a
 `--node-ipcpath` option._
 
-You can also launch `geth` separately with the same options prior starting
+You can also launch `gait` separately with the same options prior starting
 Mist.
 
 ### Deployment

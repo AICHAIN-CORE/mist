@@ -1,5 +1,5 @@
 /**
-The IPC provider backend filter and tunnel all incoming request to the ethereum node.
+The IPC provider backend filter and tunnel all incoming request to the AICHAIN node.
 
 @module ipcProviderBackend
 */
@@ -161,7 +161,7 @@ class IpcProviderBackend {
                       ethereumNode.removeListener('state', onStateChange);
 
                       log.debug(
-                        `Ethereum node connected, resume connecting socket ${ownerId}`
+                        `AICHAIN node connected, resume connecting socket ${ownerId}`
                       );
 
                       resolve();
@@ -215,9 +215,9 @@ class IpcProviderBackend {
   }
 
   /**
-   * Handler for when Ethereum node state changes.
+   * Handler for when AICHAIN node state changes.
    *
-   * Auto-reconnect sockets when ethereum node state changes
+   * Auto-reconnect sockets when AICHAIN node state changes
    *
    * @param {String} state The new state.
    */
@@ -225,7 +225,7 @@ class IpcProviderBackend {
     switch (state) { // eslint-disable-line default-case
       // stop syncing when node about to be stopped
       case ethereumNode.STATES.STOPPING:
-        log.info('Ethereum node stopping, disconnecting sockets');
+        log.info('AICHAIN node stopping, disconnecting sockets');
 
         Q.all(
           _.map(this._connections, item => {

@@ -103,12 +103,12 @@ exports.mocha = (_module, options) => {
 
       this.geth = yield startGeth();
 
-      const appFileName = options.app === 'wallet' ? 'Ethereum Wallet' : 'Mist';
+      const appFileName = options.app === 'wallet' ? 'AICHAIN Wallet' : 'Mist';
       const platformArch = `${process.platform}-${process.arch}`;
       console.info(`${appFileName} :: ${platformArch}`);
 
       let appPath;
-      const ipcProviderPath = path.join(this.geth.dataDir, 'geth.ipc');
+      const ipcProviderPath = path.join(this.geth.dataDir, 'gait.ipc');
 
       switch (platformArch) {
         case 'darwin-x64':
