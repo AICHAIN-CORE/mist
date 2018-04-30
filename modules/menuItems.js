@@ -258,16 +258,8 @@ let menuTempl = function(webviews) {
             click() {
               let userPath = Settings.userHomePath;
 
-              // eth
-              if (ethereumNode.isEth) {
-                if (process.platform === 'win32') {
-                  userPath = `${Settings.appDataPath}\\Web3\\keys`;
-                } else {
-                  userPath += '/.web3/keys';
-                }
-
-                // geth
-              } else {
+              // gait
+              {
                 if (process.platform === 'darwin') {
                   userPath += '/Library/AICHAIN/keystore';
                 }
@@ -489,31 +481,16 @@ let menuTempl = function(webviews) {
   // add node switch
   if (process.platform === 'darwin' || process.platform === 'win32') {
     const nodeSubmenu = [];
-
-    const ethClient = ClientBinaryManager.getClient('eth');
-    const gethClient = ClientBinaryManager.getClient('geth');
+    const gethClient = ClientBinaryManager.getClient('gait');
 
     if (gethClient) {
       nodeSubmenu.push({
-        label: `Geth ${gethClient.version}`,
-        checked: ethereumNode.isOwnNode && ethereumNode.isGeth,
+        label: `gait ${gethClient.version}`,
+        checked: ethereumNode.isOwnNode && ethereumNode.isGait,
         enabled: ethereumNode.isOwnNode,
         type: 'checkbox',
         click() {
-          restartNode('geth', null, 'fast', webviews);
-        }
-      });
-    }
-
-    if (ethClient) {
-      nodeSubmenu.push({
-        label: `Eth ${ethClient.version} (C++)`,
-        checked: ethereumNode.isOwnNode && ethereumNode.isEth,
-        enabled: ethereumNode.isOwnNode,
-        // enabled: false,
-        type: 'checkbox',
-        click() {
-          restartNode('eth');
+          restartNode('gait', null, 'fast', webviews);
         }
       });
     }
@@ -537,47 +514,19 @@ let menuTempl = function(webviews) {
         click() {
           restartNode(ethereumNode.type, 'main');
         }
-      }
-    ]
-  });
-
-  // Light mode switch should appear when not in Solo Mode (dev network)
-  if (
-    ethereumNode.isOwnNode &&
-    ethereumNode.isGeth &&
-    !ethereumNode.isDevNetwork
-  ) {
-    devToolsMenu.push({
-      label: 'Sync with Light client (beta)',
-      enabled: true,
-      checked: ethereumNode.isLightMode,
+      },
+      {
+        label: 'Test network',
+        accelerator: 'CommandOrControl+Alt+2',
+        checked: ethereumNode.isOwnNode && ethereumNode.network === 'testnet',
+        enabled: ethereumNode.isOwnNode,
       type: 'checkbox',
       click() {
-        restartNode('geth', null, ethereumNode.isLightMode ? 'fast' : 'light');
-      }
-    });
-  }
-
-  // Enables mining menu: only in Solo mode and Ropsten network (testnet)
-  if (
-    ethereumNode.isOwnNode &&
-    (ethereumNode.isTestNetwork || ethereumNode.isDevNetwork)
-  ) {
-    devToolsMenu.push({
-      label: global.mining
-        ? i18n.t('mist.applicationMenu.develop.stopMining')
-        : i18n.t('mist.applicationMenu.develop.startMining'),
-      accelerator: 'CommandOrControl+Shift+M',
-      enabled: true,
-      click() {
-        if (global.mining) {
-          stopMining(webviews);
-        } else {
-          startMining(webviews);
+          restartNode(ethereumNode.type, 'testnet');
         }
       }
+    ]
     });
-  }
 
   if (global.mode !== 'wallet') {
     devToolsMenu.push(
@@ -600,7 +549,7 @@ let menuTempl = function(webviews) {
 
   menu.push({
     label:
-      (global.mining ? '‚õè ' : '') +
+      (global.mining ? 'Ôø?' : '') +
       i18n.t('mist.applicationMenu.develop.label'),
     submenu: devToolsMenu
   });
@@ -647,28 +596,10 @@ let menuTempl = function(webviews) {
         click() {
           Windows.createPopup('about');
         }
-      },
-      {
-        label: i18n.t('mist.applicationMenu.app.checkForUpdates'),
-        click() {
-          updateChecker.runVisibly();
-        }
       }
     );
   }
   helpMenu.push(
-    {
-      label: i18n.t('mist.applicationMenu.help.mistWiki'),
-      click() {
-        shell.openExternal('https://github.com/AICHAIN-CORE/mist/wiki');
-      }
-    },
-    {
-      label: i18n.t('mist.applicationMenu.help.gitter'),
-      click() {
-        shell.openExternal('https://gitter.im/AICHAIN-CORE/mist');
-      }
-    },
     {
       label: i18n.t('mist.applicationMenu.help.reportBug'),
       click() {

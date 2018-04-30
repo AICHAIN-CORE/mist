@@ -143,15 +143,8 @@ ipc.on('backendAction_checkWalletFile', (e, path) => {
         e.sender.send('uiAction_checkedWalletFile', null, 'web3');
 
         let keystorePath = Settings.userHomePath;
-        // eth
-        if (ethereumNode.isEth) {
-          if (process.platform === 'win32') {
-            keystorePath = `${Settings.appDataPath}\\Web3\\keys`;
-          } else {
-            keystorePath += '/.web3/keys';
-          }
           // geth
-        } else {
+        {
           if (process.platform === 'darwin')
             keystorePath += '/Library/AICHAIN/keystore';
 
@@ -195,7 +188,7 @@ ipc.on('backendAction_importWalletFile', (e, path, pw) => {
   const ClientBinaryManager = require('./clientBinaryManager'); // eslint-disable-line global-require
   let error = false;
 
-  const binPath = ClientBinaryManager.getClient('geth').binPath;
+  const binPath = ClientBinaryManager.getClient('gait').binPath;
   const nodeProcess = spawn(binPath, ['wallet', 'import', path]);
 
   nodeProcess.once('error', () => {

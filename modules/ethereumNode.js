@@ -14,9 +14,9 @@ const ClientBinaryManager = require('./clientBinaryManager');
 import logger from './utils/logger';
 const ethereumNodeLog = logger.create('EthereumNode');
 
-const DEFAULT_NODE_TYPE = 'geth';
+const DEFAULT_NODE_TYPE = 'gait';
 const DEFAULT_NETWORK = 'main';
-const DEFAULT_SYNCMODE = 'light';
+const DEFAULT_SYNCMODE = 'fast';
 
 const UNABLE_TO_BIND_PORT_ERROR = 'unableToBindPort';
 const NODE_START_WAIT_MS = 3000;
@@ -74,12 +74,8 @@ class EthereumNode extends EventEmitter {
     return this._syncMode;
   }
 
-  get isEth() {
-    return this._type === 'eth';
-  }
-
-  get isGeth() {
-    return this._type === 'geth';
+  get isGait() {
+    return this._type === 'gait';
   }
 
   get isMainNetwork() {
@@ -87,11 +83,7 @@ class EthereumNode extends EventEmitter {
   }
 
   get isTestNetwork() {
-    return this.network === 'test';
-  }
-
-  get isRinkebyNetwork() {
-    return this.network === 'rinkeby';
+    return this.network === 'testnet';
   }
 
   get isDevNetwork() {
@@ -270,7 +262,7 @@ class EthereumNode extends EventEmitter {
   _start(nodeType, network, syncMode) {
     ethereumNodeLog.info(`Start node: ${nodeType} ${network} ${syncMode}`);
 
-    const isTestNet = network === 'test';
+    const isTestNet = network === 'testnet';
 
     if (isTestNet) {
       ethereumNodeLog.debug('Node will connect to the test network');
@@ -325,7 +317,7 @@ class EthereumNode extends EventEmitter {
 
         // if unable to start eth node then write geth to defaults
         if (nodeType === 'eth') {
-          Settings.saveUserData('node', 'geth');
+          Settings.saveUserData('node', 'gait');
         }
 
         throw err;
@@ -366,7 +358,7 @@ class EthereumNode extends EventEmitter {
    */
   __startProcess(nodeType, network, binPath, _syncMode) {
     let syncMode = _syncMode;
-    if (nodeType === 'geth' && !syncMode) {
+    if (nodeType === 'gait' && !syncMode) {
       syncMode = DEFAULT_SYNCMODE;
     }
 
@@ -404,7 +396,7 @@ class EthereumNode extends EventEmitter {
 
       switch (network) {
         // Starts Ropsten network
-        case 'test':
+        case 'testnet':
           args = [
             '--testnet',
             '--syncmode',
@@ -416,34 +408,10 @@ class EthereumNode extends EventEmitter {
           ];
           break;
 
-        // Starts Rinkeby network
-        case 'rinkeby':
-          args = [
-            '--rinkeby',
-            '--syncmode',
-            syncMode,
-            '--cache',
-            process.arch === 'x64' ? '1024' : '512',
-            '--ipcpath',
-            Settings.rpcIpcPath
-          ];
-          break;
-
-        // Starts local network
-        case 'dev':
-          args = [
-            '--dev',
-            '--minerthreads',
-            '1',
-            '--ipcpath',
-            Settings.rpcIpcPath
-          ];
-          break;
-
         // Starts Main net
         default:
           args =
-            nodeType === 'geth'
+            nodeType === 'gait'
               ? [
                   '--syncmode',
                   syncMode,
@@ -547,9 +515,9 @@ class EthereumNode extends EventEmitter {
     // check for geth startup errors
     if (STATES.STARTING === this.state) {
       const dataStr = data.toString().toLowerCase();
-      if (nodeType === 'geth') {
+      if (nodeType === 'gait') {
         if (dataStr.indexOf('fatal: error') >= 0) {
-          const error = new Error(`Geth error: ${dataStr}`);
+          const error = new Error(`Gait error: ${dataStr}`);
 
           if (dataStr.indexOf('bind') >= 0) {
             error.tag = UNABLE_TO_BIND_PORT_ERROR;

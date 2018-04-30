@@ -60,9 +60,9 @@ class Manager extends EventEmitter {
       binPath += '.exe';
     }
     
-    this._availableClients.geth = {
+    this._availableClients.gait = {
       binPath,
-      version: '1.8.2'
+      version: '1.0.1'
     };
   }
 
@@ -70,47 +70,6 @@ class Manager extends EventEmitter {
     log.debug(`Status: ${status} - ${msg}`);
 
     this.emit('status', status, msg);
-  }
-
-  _resolveEthBinPath() {
-    log.info('Resolving path to Eth client binary ...');
-
-    let platform = process.platform;
-
-    // "win32" -> "win" (because nodes are bundled by electron-builder)
-    if (platform.indexOf('win') === 0) {
-      platform = 'win';
-    } else if (platform.indexOf('darwin') === 0) {
-      platform = 'mac';
-    }
-
-    log.debug(`Platform: ${platform}`);
-
-    let binPath = path.join(
-      __dirname,
-      '..',
-      'nodes',
-      'eth',
-      `${platform}-${process.arch}`
-    );
-
-    if (Settings.inProductionMode) {
-      // get out of the ASAR
-      binPath = binPath.replace('nodes', path.join('..', '..', 'nodes'));
-    }
-
-    binPath = path.join(path.resolve(binPath), 'eth');
-
-    if (platform === 'win') {
-      binPath += '.exe';
-    }
-
-    log.info(`Eth client binary path: ${binPath}`);
-
-    this._availableClients.eth = {
-      binPath,
-      version: '1.3.0'
-    };
   }
 }
 
