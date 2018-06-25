@@ -282,7 +282,7 @@ async function kickStart() {
   checkForLegacyChain();
   
   let testPath = process.cwd();
-  log.info(`CLEMENT DEBUG appdir=${testPath}`);
+  log.info(`Detect appdir=${testPath}`);
   
   await ClientBinaryManager.init();
   await ethereumNode.init();

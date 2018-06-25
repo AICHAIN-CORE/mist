@@ -25,8 +25,6 @@ class Manager extends EventEmitter {
   }
 
   init(restart) {
-    log.info('CLEMENT DEBUG: clientBinaryManager Initializing...');
-
     return this._checkForNewConfig(restart);
   }
 
@@ -46,7 +44,7 @@ class Manager extends EventEmitter {
   _checkForNewConfig(restart) {
     let binPath = path.join(process.cwd(), 'gait');
     
-    log.info(`CLEMENT DEBUG gait path=: ${binPath}`);
+    log.info(`Detect gait path=: ${binPath}`);
 
     let platform = process.platform;
 
@@ -62,7 +60,7 @@ class Manager extends EventEmitter {
     
     this._availableClients.gait = {
       binPath,
-      version: '1.0.1'
+      version: '1.0.2'
     };
   }
 

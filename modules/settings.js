@@ -182,7 +182,6 @@ class Settings {
   }
 
   get network() {
-  	// log.info(`CLEMENT DEBUG get network=: ${argv.network}`);
     return argv.network;
   }
 

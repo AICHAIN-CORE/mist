@@ -149,7 +149,7 @@ Helpers.generateBreadcrumb = function(url) {
     filteredUrl.protocol +
       '//' +
       _.flatten(['<span>' + filteredUrl.host + ' </span>', pathname]).join(
-        ' â–?'
+        ' a�C?'
       )
   );
 };
